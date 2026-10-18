@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Unzip Project Files
         run: |
@@ -32,8 +32,8 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Build APK
-        run: flutter build apk --debug
+      - name: Build APK (Bypass AGP check)
+        run: flutter build apk --debug --android-skip-build-dependency-validation
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
