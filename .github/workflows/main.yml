@@ -37,12 +37,13 @@ jobs:
       - name: Install dependencies
         run: |
           if [ -d "pharmacy_app" ]; then cd pharmacy_app; fi
-          flutter pub get --no-example
+          # استخدام متغيرات لمنع توقف العملية بسبب التحذيرات
+          flutter pub get --offline || flutter pub get
 
       - name: Build APK
         run: |
           if [ -d "pharmacy_app" ]; then cd pharmacy_app; fi
-          flutter build apk --debug --android-skip-build-dependency-validation --no-pub
+          flutter build apk --debug --android-skip-build-dependency-validation
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
